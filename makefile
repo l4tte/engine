@@ -1,7 +1,7 @@
 COMP=g++
 COMPARGS=-Wall -std=c++17 
 OUTPUT=rl
-LIBS=-lsdl
+LIBS=-lsdl2
 
 LIBDIR=Lib/
 INCLUDEDIR=Include/
