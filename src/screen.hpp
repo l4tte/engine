@@ -17,13 +17,20 @@ class RLEConsole
     // Width: Width of screen in pixels
     // Height: Height of screen in pixels
     RLEConsole(int width, int height, int tilesize);
+
     // Free Window, Renderer, and Texture. Should be called only
     // Once in the internal function RLEEngine::Exit
     ~RLEConsole();
+
+    // Clear the screen, mostly used internally in Render(),
+    // Will memset the pixels to all white
+    void Clear();
+
     // Will render the screen by copying the internal array of 
     // pixels to texture, the texture to a renderer, and then
     // presenting the renderer. Called once per frame.
     void Render();
+    
     // Sets the value of a pixel on the screen. 
     // Will edit the int32_t* pixel array which is updated
     // in Render(). Mostly used internally.

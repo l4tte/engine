@@ -27,9 +27,11 @@ namespace RLE
     // Basically, call at the end of every frame with your 
     // Preferred FPS
     extern void FPS(int fps);
+
     // Update the game, and handle SDL_Poll events
     // Should be called once per frame, before render
     extern void Update();
+
     // Quit, should be called once on exit.
     // Will call FreeScreen, SDL_Quit, and other functions
     // that need to be called on exit
