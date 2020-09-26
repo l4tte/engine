@@ -20,3 +20,6 @@ Documentation isn't yet available. The library will be fully documented by the t
  - [ ] Finish font class and allow for rendering text
  - [x] Working screen of variable size
  - [ ] Add setoptions function
+
+## Known bugs
+  * Malloc complains on exit

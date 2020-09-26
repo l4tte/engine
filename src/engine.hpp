@@ -4,30 +4,21 @@
 #ifndef ENGINE_HPP_
 #define ENGINE_HPP_
 
+// Include these files in .hpp for a couple reasons.
+// Every file including "Engine.hpp" is including the entire
+// Roguelike engine, including these files.
+// Also, functions/namespaces in these files are referenced 
+// Throughout this header file. So to save compile time, space,
+// and simplify everything, these files are included in
+// This header.
+// Also it makes RLE a one-include library
+#include "screen.hpp"
+#include "font.hpp"
+
 class RLEConsole;
 
 namespace RLE 
 {
-  namespace Screen 
-  {
-    extern RLEConsole *Root;
-    // TODO: make CreateScreen a bool that can fail
-	  // Create the screen of the game at RLEScreen::Root. 
-    // Will be of type RLEConsole
-    // as defined in screen.hpp/cpp
-    // Usage:
-	  //   RLE::CreateScreen(80, 50, "MyGame");
-	  extern void CreateScreen(int width, int height, char const* title);
-    // Frees the memory of the root screen created by CreateScreen
-    // Should be called on exit
-    extern void FreeScreen();
-    // Returns true if the window (RLEScreen::Root) is still open
-    // Used for game loop
-    extern bool IsOpen;
-    // Render the screen, should be called once per frame
-    // Called inside game loop, after update
-    extern void Render();
-  }  // Screen
   namespace Engine
   {
     // Used at the end of every loop by calling
@@ -49,5 +40,7 @@ namespace RLE
 // Alias namespaces
 namespace RLEScreen = RLE::Screen; 
 namespace RLEEngine = RLE::Engine;
+// Alias classes
+using RLEFont = RLE::Screen::Font;
 
 #endif  // ENGINE_HPP_

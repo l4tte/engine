@@ -7,8 +7,6 @@
 
 #include <SDL2/SDL.h>
 
-#include "screen.hpp"
-
 // Initialize RLESCreen::Root with garbage data
 // Will be set properly in RLEScreen::CreateScreen
 RLEConsole* RLEScreen::Root = (RLEConsole*)malloc(sizeof(RLEConsole));
@@ -31,6 +29,7 @@ void RLEScreen::Render()
 
 void RLEScreen::FreeScreen()
 {
+  RLEScreen::Root->~RLEConsole();
   delete RLEScreen::Root;
 }
 
@@ -58,6 +57,5 @@ void RLEEngine::Update()
 void RLEEngine::Exit()
 {
   RLEScreen::FreeScreen();
-  RLEScreen::Root->~RLEConsole();
   SDL_Quit();
 }
