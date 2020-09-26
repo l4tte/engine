@@ -24,12 +24,17 @@ void RLEScreen::CreateScreen(int width, int height, char const* title)
   RLEScreen::IsOpen = true;
 }
 
+void RLEScreen::Render()
+{
+  RLEScreen::Root->Render();
+}
+
 void RLEScreen::FreeScreen()
 {
   delete RLEScreen::Root;
 }
 
-void RLEEngine::Delay(int fps)
+void RLEEngine::FPS(int fps)
 {
   SDL_Delay(1000 / fps);
 }
@@ -50,3 +55,9 @@ void RLEEngine::Update()
   }
 }
 
+void RLEEngine::Exit()
+{
+  RLEScreen::FreeScreen();
+  RLEScreen::Root->~RLEConsole();
+  SDL_Quit();
+}

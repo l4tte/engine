@@ -1,3 +1,6 @@
+# Copyright (c) 2020, Ari Eythorsson
+# See LICENSE.txt for more information
+
 COMP=g++
 COMPARGS=-Wall -std=c++17 
 OUTPUT=rl

@@ -6,7 +6,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-RLEConsole::RLEConsole(int width, int height, int tilesize)
+RLEConsole::RLEConsole(int width, int height, int tilesize) :
+  width(width), height(height), tilesize(tilesize)
 {
   int widthpx = tilesize * width;
   int heightpx = tilesize * height;
@@ -17,4 +18,23 @@ RLEConsole::RLEConsole(int width, int height, int tilesize)
     widthpx, heightpx,
     0
   );
+  Renderer = SDL_CreateRenderer(
+    Window,
+    -1,
+    SDL_RENDERER_ACCELERATED
+  );
+}
+
+RLEConsole::~RLEConsole()
+{
+  SDL_DestroyWindow(Window);
+  SDL_DestroyRenderer(Renderer);
+}
+
+void RLEConsole::Render()
+{
+  // Clear the renderer
+  SDL_RenderClear(Renderer);
+  // Present the renderer
+  SDL_RenderPresent(Renderer);
 }

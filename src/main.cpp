@@ -10,7 +10,11 @@ int main()
   while (RLEScreen::IsOpen) // While the screen is open
   {
    RLEEngine::Update();
-   RLEEngine::Delay(60); // 60 FPS
+
+   RLEScreen::Render();
+   RLEEngine::FPS(60); // 60 FPS
   }
+
+  RLEEngine::Exit();
 	return 0;
 }

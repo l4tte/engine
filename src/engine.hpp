@@ -24,6 +24,9 @@ namespace RLE
     // Returns true if the window (RLEScreen::Root) is still open
     // Used for game loop
     extern bool IsOpen;
+    // Render the screen, should be called once per frame
+    // Called inside game loop, after update
+    extern void Render();
   }  // Screen
   namespace Engine
   {
@@ -32,13 +35,14 @@ namespace RLE
     // will make the game run at int fps frames per second
     // Basically, call at the end of every frame with your 
     // Preferred FPS
-    extern void Delay(int fps);
+    extern void FPS(int fps);
     // Update the game, and handle SDL_Poll events
     // Should be called once per frame, before render
     extern void Update();
-    // Render the screen, should be called once per frame
-    // Called inside game loop, after update
-    //extern void Render();
+    // Quit, should be called once on exit.
+    // Will call FreeScreen, SDL_Quit, and other functions
+    // that need to be called on exit
+    extern void Exit();
   }
 }  // RLE 
 
