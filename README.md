@@ -22,4 +22,4 @@ Documentation isn't yet available. The library will be fully documented by the t
  - [ ] Add setoptions function
 
 ## Known bugs
-  * ~~Malloc complains on exit~~
+  - [x] Malloc complains on exit
