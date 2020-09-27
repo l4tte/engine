@@ -9,36 +9,36 @@
 
 // Initialize RLESCreen::Root with garbage data
 // Will be set properly in RLEScreen::CreateScreen
-RLEConsole* RLEScreen::Root = (RLEConsole*)malloc(sizeof(RLEConsole));
-// Initialize RLEScreen::IsOpen bool to false
+RLEConsole* RLE::Screen::Root = (RLEConsole*)malloc(sizeof(RLEConsole));
+// Initialize RLE::Screen::IsOpen bool to false
 // Because the window is closed until initialized in
-// RLEScreen::CreateScreen
-bool RLEScreen::IsOpen = false;
+// RLE::Screen::CreateScreen
+bool RLE::Screen::IsOpen = false;
 
-void RLEScreen::CreateScreen(int width, int height, char const* title)
+void RLE::Screen::CreateScreen(int width, int height, char const* title)
 {
   // TODO: Dynamic tilesize
-  RLEScreen::Root = new RLEConsole(width, height, 16);
-  RLEScreen::IsOpen = true;
+  RLE::Screen::Root = new RLEConsole(width, height, 16);
+  RLE::Screen::IsOpen = true;
 }
 
-void RLEScreen::Render()
+void RLE::Screen::Render()
 {
-  RLEScreen::Root->Render();
+  RLE::Screen::Root->Render();
 }
 
-void RLEScreen::FreeScreen()
+void RLE::Screen::FreeScreen()
 {
-  RLEScreen::Root->~RLEConsole();
-  delete RLEScreen::Root;
+  RLE::Screen::Root->~RLEConsole();
+  delete RLE::Screen::Root;
 }
 
-void RLEEngine::FPS(int fps)
+void RLE::Engine::FPS(int fps)
 {
   SDL_Delay(1000 / fps);
 }
 
-void RLEEngine::Update()
+void RLE::Engine::Update()
 {
   // Handle events
   SDL_Event event;
@@ -54,8 +54,8 @@ void RLEEngine::Update()
   }
 }
 
-void RLEEngine::Exit()
+void RLE::Engine::Exit()
 {
-  RLEScreen::FreeScreen();
+  RLE::Screen::FreeScreen();
   SDL_Quit();
 }

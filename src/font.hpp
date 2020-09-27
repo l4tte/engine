@@ -8,10 +8,10 @@ namespace RLE
     class Font
     {
       public:
-        Font()
-        {
-        
-        }
+        Font(char* path, char* letters);
+      private:
+        char* path;
+        char* letters;
     };  // Font
   }  // Screen
 }  // RLE
