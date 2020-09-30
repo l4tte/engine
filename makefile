@@ -2,7 +2,7 @@
 # See LICENSE.txt for more information
 
 COMP=g++
-COMPARGS=-Wall -std=c++17 
+COMPARGS=-Wall -std=c++17 -O1 -pthread
 OUTPUT=rl
 LIBS=-lsdl2
 

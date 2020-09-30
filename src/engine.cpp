@@ -4,21 +4,41 @@
 #include "engine.hpp"
 
 #include <stdlib.h> // For malloc
+#include <iostream>
 
 #include <SDL2/SDL.h>
+
+#include "font.hpp"
 
 // Initialize RLESCreen::Root with garbage data
 // Will be set properly in RLEScreen::CreateScreen
 RLEConsole* RLE::Screen::Root = (RLEConsole*)malloc(sizeof(RLEConsole));
+
 // Initialize RLE::Screen::IsOpen bool to false
 // Because the window is closed until initialized in
 // RLE::Screen::CreateScreen
 bool RLE::Screen::IsOpen = false;
 
-void RLE::Screen::CreateScreen(int width, int height, char const* title)
+int main()
+{
+  SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
+  RLE::Init(); // Initial setup, defined by user
+  while (RLEScreen::IsOpen) // While the screen is open
+  {
+   RLEEngine::Update();
+   RLE::Update(); // Game loop, defined by user
+   RLEScreen::Render();
+   RLEEngine::FPS(120); // 120 FPS
+  }
+  RLEEngine::Exit();
+	return 0;
+}
+
+
+void RLE::Screen::CreateScreen(int tilesize, int width, int height, char const* title)
 {
   // TODO: Dynamic tilesize
-  RLE::Screen::Root = new RLEConsole(width, height, 16);
+  RLE::Screen::Root = new RLEConsole(width, height, tilesize);
   RLE::Screen::IsOpen = true;
 }
 
@@ -40,6 +60,7 @@ void RLE::Engine::FPS(int fps)
 
 void RLE::Engine::Update()
 {
+  RLE::Screen::Root->KeyboardStateUpdate();
   // Handle events
   SDL_Event event;
   while(SDL_PollEvent(&event))
@@ -50,6 +71,15 @@ void RLE::Engine::Update()
       // Change IsOpen bool 
       case SDL_QUIT:
         Screen::IsOpen = false;
+        break;
+
+      case SDL_KEYDOWN:
+        if (!event.key.repeat)
+        {
+          Screen::Root->KeyPressed_(event.key.keysym.scancode, true);
+          std::cout << Screen::Root->IsKeyDown('d') << "\n";
+        }
+        break;
     }
   }
 }

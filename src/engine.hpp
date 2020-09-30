@@ -1,6 +1,8 @@
 // Copyright (c) 2020, Ari Eythorsson
 // See LICENSE.txt for more information
 
+// TODO: Actual documentation
+
 #ifndef ENGINE_HPP_
 #define ENGINE_HPP_
 
@@ -19,6 +21,18 @@ class RLEConsole;
 
 namespace RLE 
 {
+  // Important functions used in the main file.
+  // This will be called once at the beggining
+  // This will be defined *by the user*. 
+  // If it is not found then the user has not defined RLE::Init
+  // Should be defined by the program including the engine
+  extern void Init();
+
+  // Just like init, but called ever frame.
+  // Will be defined *by the user*, not by RLE.
+  // Should be defined by the program including the engine
+  extern void Update();
+
   namespace Engine
   {
     // Used at the end of every loop by calling
@@ -39,10 +53,6 @@ namespace RLE
   }
 }  // RLE 
 
-// Alias namespaces
-namespace RLEScreen = RLE::Screen; 
-namespace RLEEngine = RLE::Engine;
-// Alias classes
-using RLEFont = RLE::Screen::Font;
+#include "alias.hpp" // Now that everything is defined, add needed aliases
 
 #endif  // ENGINE_HPP_

@@ -4,17 +4,33 @@
 #include <iostream>
 #include "engine.hpp"
 
-int main()
+void RLE::Init()
 {
-  RLEScreen::CreateScreen(20, 20, "RL");
-  while (RLEScreen::IsOpen) // While the screen is open
-  {
-   RLEEngine::Update();
+  RLEScreen::CreateScreen(15, 20, 20, "RL");
+  RLEScreen::Root->SetFont("terminal.bmp", 16, 16);
+}
 
-   RLEScreen::Render();
-   RLEEngine::FPS(60); // 60 FPS
+int px = 0;
+int py = 0;
+
+void RLE::Update()
+{
+  if (RLEScreen::Root->IsKeyDown('d'))
+  {
+    px++;
+  } else if (RLEScreen::Root->IsKeyDown('a'))
+  {
+    px--;
   }
 
-  RLEEngine::Exit();
-	return 0;
+  if (RLEScreen::Root->IsKeyDown('s'))
+  {
+    py++;
+  } else if (RLEScreen::Root->IsKeyDown('w'))
+  {
+    py--;
+  }
+  
+
+  RLEScreen::Root->SetChar(px, py, {'@'});
 }
